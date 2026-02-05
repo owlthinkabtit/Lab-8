@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Flashcards App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <h1>Flashcards</h1>
+        <button class="btn new-deck">+ New Deck</button>
+      </div>
+    </header>
+
+    <div class="app grid">
+      <aside class="sidebar" aria-label="Decks">
+        <h2>Decks</h2>
+        <ul class="deck-list" aria-live="polite"></ul>
+      </aside>
+
+      <main class="main" role="main">
+        <section class="card-area">
+          <div class="card-toolbar">
+            <div class="deck-title"><strong class="deck-name"></strong></div>
+            <div class="search">
+              <input
+                class="search-input"
+                aria-label="Search cards"
+                placeholder="Search cards…"
+              />
+              <span class="search-count" aria-live="polite"></span>
+            </div>
+            <div class="card-controls">
+              <button class="btn new-card">+ New Card</button>
+              <button class="btn edit-card">Edit Card</button>
+            </div>
+          </div>
+
+          <article
+            class="card"
+            tabindex="0"
+            role="button"
+            aria-pressed="false"
+            aria-label="Flashcard. Press Space or Enter to flip."
+          >
+            <div class="front"></div>
+            <div class="back"></div>
+          </article>
+
+          <div class="controls">
+            <button class="btn prev">Prev</button>
+            <button class="btn flip">Flip</button>
+            <button class="btn next">Next</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <div class="container">
+        © 2026 Flashcards • <small>minimal demo</small>
+      </div>
+    </footer>
+
+    <!-- Accessible modal for deck create/edit -->
+    <div
+      id="modal"
+      class="modal-backdrop hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <div class="modal" role="document" tabindex="-1">
+        <header class="modal-header">
+          <h3 id="modal-title">New Deck</h3>
+          <button class="btn close-modal" aria-label="Close dialog">
+            &times;
+          </button>
+        </header>
+        <form id="deck-form">
+          <div class="form-row">
+            <label for="deck-name">Deck name</label>
+            <input id="deck-name" name="name" required />
+          </div>
+          <div class="modal-actions">
+            <button type="submit" class="btn save">Save</button>
+            <button type="button" class="btn cancel">Cancel</button>
+            <button type="button" class="btn delete hidden">Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Card modal for create/edit -->
+    <div
+      id="card-modal"
+      class="modal-backdrop hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="card-modal-title"
+    >
+      <div class="modal" role="document" tabindex="-1">
+        <header class="modal-header">
+          <h3 id="card-modal-title">New Card</h3>
+          <button class="btn close-card-modal" aria-label="Close dialog">
+            &times;
+          </button>
+        </header>
+        <form id="card-form">
+          <div class="form-row">
+            <label for="card-question">Question</label>
+            <textarea
+              id="card-question"
+              name="question"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <div class="form-row">
+            <label for="card-answer">Answer</label>
+            <textarea
+              id="card-answer"
+              name="answer"
+              rows="4"
+              required
+            ></textarea>
+          </div>
+          <div class="modal-actions">
+            <button type="submit" class="btn save">Save</button>
+            <button type="button" class="btn cancel">Cancel</button>
+            <button type="button" class="btn delete hidden">Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="storage.js" defer></script>
+    <script src="script.js" defer></script>
+
+    <div class="kbd-hint" role="note" aria-live="polite">
+      <button class="close-hint" aria-label="Dismiss shortcuts">&times;</button>
+      <div class="hint-content">
+        <strong>Shortcuts</strong>
+        <div>
+          <kbd>Space/Enter</kbd> flip • <kbd>←</kbd>/<kbd>→</kbd> prev/next •
+          <kbd>j</kbd>/<kbd>k</kbd> decks • <kbd>Ctrl/Cmd + ←/→</kbd> jump decks
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
